@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Save, Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface AgentConfig {
   id: string;
@@ -17,6 +18,7 @@ interface AgentConfig {
 }
 
 export default function Settings() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -40,7 +42,7 @@ export default function Settings() {
       console.error("Error fetching config:", error);
       toast({
         title: "Error",
-        description: "Failed to load configuration",
+        description: t("settings.error"),
         variant: "destructive",
       });
     } finally {
@@ -66,14 +68,14 @@ export default function Settings() {
       if (error) throw error;
 
       toast({
-        title: "Settings Saved",
-        description: "Your agent configuration has been updated.",
+        title: t("settings.success"),
+        description: t("settings.success"),
       });
     } catch (error) {
       console.error("Error saving config:", error);
       toast({
         title: "Error",
-        description: "Failed to save configuration",
+        description: t("settings.error"),
         variant: "destructive",
       });
     } finally {
@@ -95,75 +97,66 @@ export default function Settings() {
     <Layout>
       <div className="container mx-auto max-w-2xl px-6 py-12">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("settings.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Configure your AI voice agent's behavior and knowledge
+            {t("settings.subtitle")}
           </p>
         </div>
 
         <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
           {/* Restaurant Name */}
           <div className="space-y-2">
-            <Label htmlFor="restaurant_name">Restaurant Name</Label>
+            <Label htmlFor="restaurant_name">{t("settings.form.restaurantName")}</Label>
             <Input
               id="restaurant_name"
               value={config?.restaurant_name || ""}
               onChange={(e) =>
                 setConfig((prev) => prev && { ...prev, restaurant_name: e.target.value })
               }
-              placeholder="Enter restaurant name"
+              placeholder={t("settings.form.restaurantNamePlaceholder")}
             />
           </div>
 
           {/* Restaurant Hours */}
           <div className="space-y-2">
-            <Label htmlFor="restaurant_hours">Restaurant Hours</Label>
+            <Label htmlFor="restaurant_hours">{t("settings.form.restaurantHours")}</Label>
             <Textarea
               id="restaurant_hours"
               value={config?.restaurant_hours || ""}
               onChange={(e) =>
                 setConfig((prev) => prev && { ...prev, restaurant_hours: e.target.value })
               }
-              placeholder="Enter operating hours"
+              placeholder={t("settings.form.restaurantHoursPlaceholder")}
               rows={3}
             />
-            <p className="text-xs text-muted-foreground">
-              Example: Monday-Friday: 11am-10pm, Saturday-Sunday: 10am-11pm
-            </p>
           </div>
 
           {/* Menu */}
           <div className="space-y-2">
-            <Label htmlFor="menu">Menu</Label>
+            <Label htmlFor="menu">{t("settings.form.menu")}</Label>
             <Textarea
               id="menu"
               value={config?.menu || ""}
               onChange={(e) =>
                 setConfig((prev) => prev && { ...prev, menu: e.target.value })
               }
-              placeholder="Enter menu items"
+              placeholder={t("settings.form.menuPlaceholder")}
               rows={5}
             />
-            <p className="text-xs text-muted-foreground">
-              List your menu items, specials, and prices
-            </p>
           </div>
 
           {/* Custom Instructions */}
           <div className="space-y-2">
-            <Label htmlFor="instructions">Custom Instructions</Label>
+            <Label htmlFor="instructions">{t("settings.form.instructions")}</Label>
             <Textarea
               id="instructions"
               value={config?.instructions || ""}
               onChange={(e) =>
                 setConfig((prev) => prev && { ...prev, instructions: e.target.value })
               }
-              placeholder="Enter custom instructions for the AI agent"
+              placeholder={t("settings.form.instructionsPlaceholder")}
               rows={5}
             />
-            <p className="text-xs text-muted-foreground">
-              Customize how the AI behaves, its personality, and any special rules
-            </p>
           </div>
 
           {/* Save Button */}
@@ -171,12 +164,12 @@ export default function Settings() {
             {saving ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Saving...
+                {t("settings.saving")}
               </>
             ) : (
               <>
                 <Save className="mr-2 h-4 w-4" />
-                Save Settings
+                {t("settings.save")}
               </>
             )}
           </Button>

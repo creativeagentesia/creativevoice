@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface Conversation {
   id: string;
@@ -25,6 +26,7 @@ interface Conversation {
 }
 
 export default function Conversations() {
+  const { t } = useTranslation();
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -92,9 +94,9 @@ export default function Conversations() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-primary/20 text-primary border-primary/30">Active</Badge>;
+        return <Badge className="bg-primary/20 text-primary border-primary/30">{t("conversations.status.active")}</Badge>;
       case "completed":
-        return <Badge variant="secondary">Completed</Badge>;
+        return <Badge variant="secondary">{t("conversations.status.completed")}</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -104,18 +106,18 @@ export default function Conversations() {
     <Layout>
       <div className="container mx-auto px-6 py-12">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-foreground">Conversations</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("conversations.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Monitor and review all voice conversations
+            {t("conversations.subtitle")}
           </p>
         </div>
 
         {/* Stats */}
         <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <StatsCard title="Total Calls" value={stats.total} icon={Phone} />
-          <StatsCard title="Active Now" value={stats.active} icon={Activity} />
+          <StatsCard title={t("conversations.stats.totalCalls")} value={stats.total} icon={Phone} />
+          <StatsCard title={t("conversations.stats.activeCalls")} value={stats.active} icon={Activity} />
           <StatsCard
-            title="Avg Duration"
+            title={t("conversations.stats.avgDuration")}
             value={formatDuration(stats.avgDuration)}
             icon={Clock}
           />
@@ -126,30 +128,30 @@ export default function Conversations() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Customer</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Duration</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>{t("conversations.table.customer")}</TableHead>
+                <TableHead>{t("conversations.table.date")}</TableHead>
+                <TableHead>{t("conversations.table.duration")}</TableHead>
+                <TableHead>{t("conversations.table.status")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                    Loading conversations...
+                    {t("conversations.loading")}
                   </TableCell>
                 </TableRow>
               ) : conversations.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                    No conversations yet. Start a voice call to see data here.
+                    {t("conversations.noConversations")}
                   </TableCell>
                 </TableRow>
               ) : (
                 conversations.map((conversation) => (
                   <TableRow key={conversation.id}>
                     <TableCell className="font-medium">
-                      {conversation.customer_name || "Unknown Caller"}
+                      {conversation.customer_name || t("conversations.unknown")}
                     </TableCell>
                     <TableCell>
                       {format(new Date(conversation.created_at), "MMM d, yyyy h:mm a")}

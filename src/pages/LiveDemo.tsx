@@ -1,7 +1,10 @@
 import { Layout } from "@/components/Layout";
 import { VoiceInterface } from "@/components/VoiceInterface";
+import { useTranslation } from "react-i18next";
 
 export default function LiveDemo() {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <div className="gradient-mesh min-h-screen">
@@ -9,11 +12,10 @@ export default function LiveDemo() {
           {/* Hero Section */}
           <div className="mb-16 text-center animate-fade-in">
             <h1 className="mb-4 text-5xl font-bold tracking-tight text-foreground">
-              AI Voice Agent Demo
+              {t("liveDemo.title")}
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Experience our AI-powered restaurant receptionist. Click the microphone to start 
-              a conversation and make a reservation using natural voice interaction.
+              {t("liveDemo.subtitle")}
             </p>
           </div>
 
@@ -25,18 +27,18 @@ export default function LiveDemo() {
           {/* Features */}
           <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-3">
             <FeatureCard
-              title="Natural Conversation"
-              description="Speak naturally and the AI will understand your requests for reservations, menu inquiries, and more."
+              title={t("liveDemo.features.naturalConversation.title")}
+              description={t("liveDemo.features.naturalConversation.description")}
               delay="0.3s"
             />
             <FeatureCard
-              title="Real-time Response"
-              description="Get instant voice responses powered by OpenAI's Realtime API with ultra-low latency."
+              title={t("liveDemo.features.realtimeResponse.title")}
+              description={t("liveDemo.features.realtimeResponse.description")}
               delay="0.4s"
             />
             <FeatureCard
-              title="Smart Reservations"
-              description="The AI automatically collects details and confirms your booking with an email."
+              title={t("liveDemo.features.smartReservations.title")}
+              description={t("liveDemo.features.smartReservations.description")}
               delay="0.5s"
             />
           </div>

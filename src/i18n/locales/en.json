@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "liveDemo": "Live Demo",
+    "conversations": "Conversations",
+    "reservations": "Reservations",
+    "settings": "Settings",
+    "poweredBy": "Powered by"
+  },
+  "liveDemo": {
+    "title": "AI Voice Agent Demo",
+    "subtitle": "Experience our AI-powered restaurant receptionist. Click the microphone to start a conversation and make a reservation using natural voice interaction.",
+    "features": {
+      "naturalConversation": {
+        "title": "Natural Conversation",
+        "description": "Speak naturally and the AI will understand your requests for reservations, menu inquiries, and more."
+      },
+      "realtimeResponse": {
+        "title": "Real-time Response",
+        "description": "Get instant voice responses powered by OpenAI's Realtime API with ultra-low latency."
+      },
+      "smartReservations": {
+        "title": "Smart Reservations",
+        "description": "The AI automatically collects details and confirms your booking with an email."
+      }
+    }
+  },
+  "conversations": {
+    "title": "Voice Conversations",
+    "subtitle": "Monitor and review all AI voice interactions",
+    "stats": {
+      "totalCalls": "Total Calls",
+      "activeCalls": "Active Calls",
+      "avgDuration": "Avg Duration"
+    },
+    "table": {
+      "customer": "Customer",
+      "date": "Date",
+      "duration": "Duration",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "completed": "Completed"
+    },
+    "loading": "Loading conversations...",
+    "noConversations": "No conversations yet",
+    "unknown": "Unknown"
+  },
+  "reservations": {
+    "title": "Reservations",
+    "subtitle": "Manage all restaurant reservations",
+    "stats": {
+      "total": "Total Reservations",
+      "today": "Today's Bookings",
+      "thisWeek": "This Week"
+    },
+    "table": {
+      "guest": "Guest",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Guests",
+      "status": "Status"
+    },
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "cancelled": "Cancelled"
+    },
+    "loading": "Loading reservations...",
+    "noReservations": "No reservations yet"
+  },
+  "settings": {
+    "title": "Agent Settings",
+    "subtitle": "Configure the AI voice agent's behavior and knowledge",
+    "form": {
+      "restaurantName": "Restaurant Name",
+      "restaurantNamePlaceholder": "e.g., Bella Italia",
+      "restaurantHours": "Operating Hours",
+      "restaurantHoursPlaceholder": "e.g., Mon-Fri 11am-10pm, Sat-Sun 10am-11pm",
+      "menu": "Menu",
+      "menuPlaceholder": "Enter menu items and descriptions...",
+      "instructions": "Custom Instructions",
+      "instructionsPlaceholder": "Additional instructions for the voice agent..."
+    },
+    "save": "Save Settings",
+    "saving": "Saving...",
+    "loading": "Loading settings...",
+    "success": "Settings saved successfully",
+    "error": "Failed to save settings"
+  },
+  "voiceInterface": {
+    "clickToStart": "Click to start conversation",
+    "connecting": "Connecting...",
+    "listening": "Listening...",
+    "speaking": "Speaking...",
+    "error": "Connection error"
+  }
+}

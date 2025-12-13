@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { format, isToday, isThisWeek, parseISO } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface Reservation {
   id: string;
@@ -27,6 +28,7 @@ interface Reservation {
 }
 
 export default function Reservations() {
+  const { t } = useTranslation();
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -83,11 +85,11 @@ export default function Reservations() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "confirmed":
-        return <Badge className="bg-primary/20 text-primary border-primary/30">Confirmed</Badge>;
+        return <Badge className="bg-primary/20 text-primary border-primary/30">{t("reservations.status.confirmed")}</Badge>;
+      case "pending":
+        return <Badge variant="outline">{t("reservations.status.pending")}</Badge>;
       case "cancelled":
-        return <Badge variant="destructive">Cancelled</Badge>;
-      case "completed":
-        return <Badge variant="secondary">Completed</Badge>;
+        return <Badge variant="destructive">{t("reservations.status.cancelled")}</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -106,17 +108,17 @@ export default function Reservations() {
     <Layout>
       <div className="container mx-auto px-6 py-12">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-foreground">Reservations</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("reservations.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            View and manage all restaurant reservations
+            {t("reservations.subtitle")}
           </p>
         </div>
 
         {/* Stats */}
         <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <StatsCard title="Total Reservations" value={stats.total} icon={Calendar} />
-          <StatsCard title="Today's Reservations" value={stats.today} icon={CalendarDays} />
-          <StatsCard title="This Week" value={stats.thisWeek} icon={Users} />
+          <StatsCard title={t("reservations.stats.total")} value={stats.total} icon={Calendar} />
+          <StatsCard title={t("reservations.stats.today")} value={stats.today} icon={CalendarDays} />
+          <StatsCard title={t("reservations.stats.thisWeek")} value={stats.thisWeek} icon={Users} />
         </div>
 
         {/* Table */}
@@ -124,25 +126,25 @@ export default function Reservations() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
+                <TableHead>{t("reservations.table.guest")}</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Time</TableHead>
-                <TableHead>Guests</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>{t("reservations.table.date")}</TableHead>
+                <TableHead>{t("reservations.table.time")}</TableHead>
+                <TableHead>{t("reservations.table.guests")}</TableHead>
+                <TableHead>{t("reservations.table.status")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    Loading reservations...
+                    {t("reservations.loading")}
                   </TableCell>
                 </TableRow>
               ) : reservations.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    No reservations yet. Start a voice call to make a booking.
+                    {t("reservations.noReservations")}
                   </TableCell>
                 </TableRow>
               ) : (

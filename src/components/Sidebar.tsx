@@ -1,16 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, MessageSquare, Calendar, Settings, Mic } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navigation = [
-  { name: "Live Demo", href: "/", icon: Home },
-  { name: "Conversations", href: "/conversations", icon: MessageSquare },
-  { name: "Reservations", href: "/reservations", icon: Calendar },
-  { name: "Settings", href: "/settings", icon: Settings },
-];
+import { useTranslation } from "react-i18next";
 
 export function Sidebar() {
   const location = useLocation();
+  const { t } = useTranslation();
+
+  const navigation = [
+    { name: t("nav.liveDemo"), href: "/", icon: Home },
+    { name: t("nav.conversations"), href: "/conversations", icon: MessageSquare },
+    { name: t("nav.reservations"), href: "/reservations", icon: Calendar },
+    { name: t("nav.settings"), href: "/settings", icon: Settings },
+  ];
 
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-sidebar border-r border-sidebar-border">
@@ -32,7 +34,7 @@ export function Sidebar() {
             const isActive = location.pathname === item.href;
             return (
               <Link
-                key={item.name}
+                key={item.href}
                 to={item.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
@@ -52,7 +54,7 @@ export function Sidebar() {
         <div className="border-t border-sidebar-border p-4">
           <div className="rounded-lg bg-sidebar-accent/50 p-3">
             <p className="text-xs text-sidebar-foreground">
-              Powered by OpenAI Realtime API
+              {t("nav.poweredBy")} OpenAI Realtime API
             </p>
           </div>
         </div>
