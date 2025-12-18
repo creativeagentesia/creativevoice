@@ -98,6 +98,7 @@
     "speaking": "AI is speaking...",
     "error": "Connection Failed",
     "errorDescription": "Failed to start conversation",
+    "microphoneError": "Microphone permission denied. Please allow microphone access in your browser settings.",
     "disconnected": "Disconnected",
     "disconnectedDescription": "Conversation ended",
     "startConversation": "Start Conversation",

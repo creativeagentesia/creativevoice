@@ -78,6 +78,14 @@ export function VoiceInterface() {
   const startConversation = async () => {
     setStatus("connecting");
     try {
+      // First check microphone permission
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (micError) {
+        console.error("Microphone permission error:", micError);
+        throw new Error(t("voiceInterface.microphoneError"));
+      }
+
       chatRef.current = new RealtimeChat(handleMessage);
       await chatRef.current.init();
       setStatus("connected");
@@ -89,9 +97,12 @@ export function VoiceInterface() {
     } catch (error) {
       console.error("Error starting conversation:", error);
       setStatus("disconnected");
+      
+      const errorMessage = error instanceof Error ? error.message : t("voiceInterface.errorDescription");
+      
       toast({
         title: t("voiceInterface.error"),
-        description: error instanceof Error ? error.message : t("voiceInterface.errorDescription"),
+        description: errorMessage,
         variant: "destructive",
       });
     }
