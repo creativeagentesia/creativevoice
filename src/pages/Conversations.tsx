@@ -104,16 +104,16 @@ export default function Conversations() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-6 py-12">
-        <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-foreground">{t("conversations.title")}</h1>
-          <p className="mt-2 text-muted-foreground">
+      <div className="container mx-auto px-4 lg:px-6 py-8 lg:py-12">
+        <div className="mb-6 lg:mb-8 animate-fade-in">
+          <h1 className="text-2xl lg:text-3xl font-bold text-foreground">{t("conversations.title")}</h1>
+          <p className="mt-2 text-sm lg:text-base text-muted-foreground">
             {t("conversations.subtitle")}
           </p>
         </div>
 
         {/* Stats */}
-        <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+        <div className="mb-6 lg:mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
           <StatsCard title={t("conversations.stats.totalCalls")} value={stats.total} icon={Phone} />
           <StatsCard title={t("conversations.stats.activeCalls")} value={stats.active} icon={Activity} />
           <StatsCard
@@ -124,7 +124,7 @@ export default function Conversations() {
         </div>
 
         {/* Table */}
-        <div className="rounded-xl border border-border bg-card animate-fade-in" style={{ animationDelay: "0.2s" }}>
+        <div className="rounded-xl border border-border bg-card animate-fade-in overflow-x-auto" style={{ animationDelay: "0.2s" }}>
           <Table>
             <TableHeader>
               <TableRow>

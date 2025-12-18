@@ -7,7 +7,8 @@
     "poweredBy": "Desenvolvido por"
   },
   "liveDemo": {
-    "title": "Demo do Agente de Voz IA",
+    "badge": "Tecnologia de Voz com IA",
+    "title": "Transforme Conversas com Clientes",
     "subtitle": "Experimente nossa recepcionista de restaurante com IA. Clique no microfone para iniciar uma conversa e fazer uma reserva usando interação por voz natural.",
     "features": {
       "naturalConversation": {
@@ -89,10 +90,18 @@
     "error": "Falha ao salvar configurações"
   },
   "voiceInterface": {
-    "clickToStart": "Clique para iniciar a conversa",
+    "ready": "Pronto para conectar",
     "connecting": "Conectando...",
+    "connected": "Conectado",
+    "connectedDescription": "Interface de voz pronta. Comece a falar!",
     "listening": "Ouvindo...",
-    "speaking": "Falando...",
-    "error": "Erro de conexão"
+    "speaking": "IA falando...",
+    "error": "Falha na Conexão",
+    "errorDescription": "Falha ao iniciar conversa",
+    "disconnected": "Desconectado",
+    "disconnectedDescription": "Conversa encerrada",
+    "startConversation": "Iniciar Conversa",
+    "endConversation": "Encerrar Conversa",
+    "transcript": "Transcrição da Conversa"
   }
 }
