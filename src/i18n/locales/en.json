@@ -7,7 +7,8 @@
     "poweredBy": "Powered by"
   },
   "liveDemo": {
-    "title": "AI Voice Agent Demo",
+    "badge": "AI Voice Technology",
+    "title": "Transform Customer Conversations",
     "subtitle": "Experience our AI-powered restaurant receptionist. Click the microphone to start a conversation and make a reservation using natural voice interaction.",
     "features": {
       "naturalConversation": {
@@ -89,10 +90,18 @@
     "error": "Failed to save settings"
   },
   "voiceInterface": {
-    "clickToStart": "Click to start conversation",
+    "ready": "Ready to connect",
     "connecting": "Connecting...",
+    "connected": "Connected",
+    "connectedDescription": "Voice interface is ready. Start speaking!",
     "listening": "Listening...",
-    "speaking": "Speaking...",
-    "error": "Connection error"
+    "speaking": "AI is speaking...",
+    "error": "Connection Failed",
+    "errorDescription": "Failed to start conversation",
+    "disconnected": "Disconnected",
+    "disconnectedDescription": "Conversation ended",
+    "startConversation": "Start Conversation",
+    "endConversation": "End Conversation",
+    "transcript": "Conversation Transcript"
   }
 }

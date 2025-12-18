@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { RealtimeChat, RealtimeMessage } from "@/utils/RealtimeAudio";
 import { AudioVisualizer } from "./AudioVisualizer";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 type ConnectionStatus = "disconnected" | "connecting" | "connected" | "speaking" | "listening";
 
@@ -15,6 +16,7 @@ interface TranscriptItem {
 }
 
 export function VoiceInterface() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [status, setStatus] = useState<ConnectionStatus>("disconnected");
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
@@ -81,15 +83,15 @@ export function VoiceInterface() {
       setStatus("connected");
 
       toast({
-        title: "Connected",
-        description: "Voice interface is ready. Start speaking!",
+        title: t("voiceInterface.connected"),
+        description: t("voiceInterface.connectedDescription"),
       });
     } catch (error) {
       console.error("Error starting conversation:", error);
       setStatus("disconnected");
       toast({
-        title: "Connection Failed",
-        description: error instanceof Error ? error.message : "Failed to start conversation",
+        title: t("voiceInterface.error"),
+        description: error instanceof Error ? error.message : t("voiceInterface.errorDescription"),
         variant: "destructive",
       });
     }
@@ -102,8 +104,8 @@ export function VoiceInterface() {
     setTranscript([]);
 
     toast({
-      title: "Disconnected",
-      description: "Conversation ended",
+      title: t("voiceInterface.disconnected"),
+      description: t("voiceInterface.disconnectedDescription"),
     });
   };
 
@@ -116,15 +118,15 @@ export function VoiceInterface() {
   const getStatusText = () => {
     switch (status) {
       case "disconnected":
-        return "Ready to connect";
+        return t("voiceInterface.ready");
       case "connecting":
-        return "Connecting...";
+        return t("voiceInterface.connecting");
       case "connected":
-        return "Connected";
+        return t("voiceInterface.connected");
       case "listening":
-        return "Listening...";
+        return t("voiceInterface.listening");
       case "speaking":
-        return "AI is speaking...";
+        return t("voiceInterface.speaking");
       default:
         return "";
     }
@@ -149,9 +151,9 @@ export function VoiceInterface() {
   const isActive = status !== "disconnected" && status !== "connecting";
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full max-w-2xl">
       {/* Status */}
-      <div className="mb-8 text-center">
+      <div className="mb-6 lg:mb-8 text-center">
         <div className="flex items-center justify-center gap-2">
           <div
             className={cn(
@@ -168,12 +170,12 @@ export function VoiceInterface() {
       </div>
 
       {/* Microphone Button */}
-      <div className="relative mb-8">
+      <div className="relative mb-6 lg:mb-8">
         <button
           onClick={isActive ? endConversation : startConversation}
           disabled={status === "connecting"}
           className={cn(
-            "relative flex h-32 w-32 items-center justify-center rounded-full transition-all duration-300",
+            "relative flex h-24 w-24 lg:h-32 lg:w-32 items-center justify-center rounded-full transition-all duration-300",
             isActive
               ? "bg-primary animate-pulse-glow"
               : "bg-secondary hover:bg-secondary/80",
@@ -181,24 +183,24 @@ export function VoiceInterface() {
           )}
         >
           {isActive ? (
-            <PhoneOff className="h-12 w-12 text-primary-foreground" />
+            <PhoneOff className="h-10 w-10 lg:h-12 lg:w-12 text-primary-foreground" />
           ) : (
-            <Mic className="h-12 w-12 text-foreground" />
+            <Mic className="h-10 w-10 lg:h-12 lg:w-12 text-foreground" />
           )}
         </button>
 
         {/* Audio Visualizer Ring */}
         {isActive && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-40 w-40 rounded-full border-2 border-primary/30 animate-ping" />
+            <div className="h-32 w-32 lg:h-40 lg:w-40 rounded-full border-2 border-primary/30 animate-ping" />
           </div>
         )}
       </div>
 
       {/* Audio Visualizer */}
       {isActive && (
-        <div className="mb-8">
-          <AudioVisualizer isActive={status === "speaking"} className="h-12" />
+        <div className="mb-6 lg:mb-8">
+          <AudioVisualizer isActive={status === "speaking"} className="h-10 lg:h-12" />
         </div>
       )}
 
@@ -208,30 +210,30 @@ export function VoiceInterface() {
         disabled={status === "connecting"}
         variant={isActive ? "destructive" : "default"}
         size="lg"
-        className="mb-8"
+        className="mb-6 lg:mb-8 text-sm lg:text-base"
       >
         {isActive ? (
           <>
-            <PhoneOff className="mr-2 h-5 w-5" />
-            End Conversation
+            <PhoneOff className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+            {t("voiceInterface.endConversation")}
           </>
         ) : status === "connecting" ? (
-          "Connecting..."
+          t("voiceInterface.connecting")
         ) : (
           <>
-            <Phone className="mr-2 h-5 w-5" />
-            Start Conversation
+            <Phone className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+            {t("voiceInterface.startConversation")}
           </>
         )}
       </Button>
 
       {/* Transcript */}
       {transcript.length > 0 && (
-        <div className="w-full max-w-2xl rounded-xl border border-border bg-card p-4">
+        <div className="w-full rounded-xl border border-border bg-card p-4">
           <h3 className="mb-4 text-sm font-medium text-muted-foreground">
-            Conversation Transcript
+            {t("voiceInterface.transcript")}
           </h3>
-          <div className="max-h-64 space-y-4 overflow-y-auto">
+          <div className="max-h-48 lg:max-h-64 space-y-4 overflow-y-auto">
             {transcript.map((item, index) => (
               <div
                 key={index}
@@ -242,7 +244,7 @@ export function VoiceInterface() {
               >
                 <div
                   className={cn(
-                    "max-w-[80%] rounded-lg px-4 py-2",
+                    "max-w-[85%] lg:max-w-[80%] rounded-lg px-3 py-2 lg:px-4",
                     item.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground"

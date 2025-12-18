@@ -95,15 +95,15 @@ export default function Settings() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-2xl px-6 py-12">
-        <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-foreground">{t("settings.title")}</h1>
-          <p className="mt-2 text-muted-foreground">
+      <div className="container mx-auto max-w-2xl px-4 lg:px-6 py-8 lg:py-12">
+        <div className="mb-6 lg:mb-8 animate-fade-in">
+          <h1 className="text-2xl lg:text-3xl font-bold text-foreground">{t("settings.title")}</h1>
+          <p className="mt-2 text-sm lg:text-base text-muted-foreground">
             {t("settings.subtitle")}
           </p>
         </div>
 
-        <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+        <div className="space-y-6 lg:space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
           {/* Restaurant Name */}
           <div className="space-y-2">
             <Label htmlFor="restaurant_name">{t("settings.form.restaurantName")}</Label>
