@@ -98,6 +98,7 @@
     "speaking": "IA falando...",
     "error": "Falha na Conexão",
     "errorDescription": "Falha ao iniciar conversa",
+    "microphoneError": "Permissão de microfone negada. Por favor, permita o acesso ao microfone nas configurações do navegador.",
     "disconnected": "Desconectado",
     "disconnectedDescription": "Conversa encerrada",
     "startConversation": "Iniciar Conversa",
